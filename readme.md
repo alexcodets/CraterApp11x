@@ -62,6 +62,9 @@ npm run dev</code></pre>
   </li>
 </ol>
 
+## Testing
+### WIP.
+
 <h2>Notas Adicionales</h2>
 <p>- Asegúrate de tener todas las extensiones PHP necesarias instaladas.</p>
 <p>- Si encuentras problemas, revisa los logs de Laravel y las configuraciones de PHP y MySQL.</p>
@@ -72,4 +75,3 @@ npm run dev</code></pre>
 
 </body>
 </html>
-
