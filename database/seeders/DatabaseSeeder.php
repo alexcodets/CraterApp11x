@@ -13,43 +13,45 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UsersTableSeeder::class);
-        $this->call(CurrenciesTableSeeder::class);
-        $this->call(DefaultSettingsSeeder::class);
-        $this->call(CountriesTableSeeder::class);
+        $this->call([
+            UsersTableSeeder::class,
+            CurrenciesTableSeeder::class,
+            DefaultSettingsSeeder::class,
+            CountriesTableSeeder::class,
+            PaymentMethodSeeder::class,
+            UnitSeeder::class,
+            StatesSeeder::class,
+            PbxConfPrefix::class,
+        ]);
 
-        //$this->call(EstimateTemplateSeeder::class);
-        //$this->call(InvoiceTemplateSeeder::class);
-        $this->call(PaymentMethodSeeder::class);
-        $this->call(UnitSeeder::class);
-        $this->call(StatesSeeder::class);
-        $this->call(PbxConfPrefix::class);
-
-        if (config('app.env') == 'local' || config('app.env') == 'debug') {
+        if (config('app.env') == 'local' || config('app.env') == 'debug' || config('app.env') == 'testing') {
             $this->call([
                 ModulesSeeder::class,
                 AvalaraServiceTypesSeeder::class,
                 InvoiceTemplateSeeder::class,
+                EstimateTemplateSeeder::class,
                 PbxPackageServerSeeder::class,
                 AvalaraTaxSeeder::class,
                 CustomerPackageSeeder::class,
                 PbxDidAndExtSeeder::class,
                 InternationalRateSeeder::class,
-                PbxServicesSeeder::class,
-                PbxCDRSeeder::class,
-                PbxCdrTotalesSeeder::class,
-                AvalaraLocationSeeder::class,
-                AvalaraExemptionSeeder::class,
-                AvalaraInvoiceSeeder::class,
-                //PbxHistoryCallIndiSeeder::class,
-                PbxCdrTaxSeeder::class,
-                //AvalaraExem
                 DemoSeeder::class,
-                //
-                //BandwidthSeeder::class,
-                //PbxTenantCdrSeeder::class,
-                ExtStatusSendEmailSeeder::class,
             ]);
+
+//            $this->call([
+//                PbxServicesSeeder::class,
+//                PbxCDRSeeder::class,
+//                PbxCdrTotalesSeeder::class,
+//                AvalaraLocationSeeder::class,
+//                AvalaraExemptionSeeder::class,
+//                AvalaraInvoiceSeeder::class,
+//                //PbxHistoryCallIndiSeeder::class,
+//                PbxCdrTaxSeeder::class,
+//                //AvalaraExem
+//                //BandwidthSeeder::class,
+//                //PbxTenantCdrSeeder::class,
+//                ExtStatusSendEmailSeeder::class,
+//            ]);
 
         }
 
