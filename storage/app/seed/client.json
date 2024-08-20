@@ -1,0 +1,44 @@
+[{
+    "client": {
+        "first_name": "Pepe",
+        "last_name": "LePue",
+        "name": "PepeGanga",
+        "email": "mail@mail.com",
+        "phone": "09001728888",
+        "password": "ThePassword",
+        "role": "customer",
+        "contact_name": "09001728888",
+        "customcode": "cust-00002",
+        "currency_id": 1,
+        "company_id": 1,
+        "customer_type": "B",
+        "avalara_bool": 1,
+        "creator_id": 1,
+        "avalara_type": 1
+    },
+    "address": {
+        "billing": {
+            "name": "Pepe",
+            "address_street_1": "Cerca de la mata de mango",
+            "city": "Durham",
+            "state_id": 4678,
+            "country_id": 231,
+            "zip": 27701,
+            "phone": "09001728888",
+            "type": "billing",
+            "company_id": 1
+        },
+        "shipping": {
+            "name": "Pepe",
+            "address_street_1": "Cerca de la mata de mango",
+            "city": "Durham",
+            "state_id": 4678,
+            "country_id": 231,
+            "zip": 27701,
+            "phone": "09001728888",
+            "type": "shipping",
+            "company_id": 1
+        }
+
+    }
+}]

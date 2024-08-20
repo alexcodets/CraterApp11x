@@ -1,0 +1,1 @@
+export const selectedPbxService = (state) => state.selectedPbxService

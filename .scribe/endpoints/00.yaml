@@ -1,0 +1,40 @@
+name: 'Service Details'
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/pbx/service-detail/ext/{pbx_service_id}'
+    metadata:
+      title: 'Service Details: Extension'
+      description: 'Return A List Of Extension from a specified PbxService.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      pbx_service_id:
+        name: pbx_service_id
+        description: 'The ID of the pbx service.'
+        required: true
+        example: voluptatem
+        type: string
+        custom: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success": true,"response": { "service_extensions": { "data": [{"id": 1,"company_id": 1,"creator_id": 1,"name": "Peter Griffin","ext": 2001,"extensionid": null,"email": "none@none.com","status": "enabled","created_at": "2022-10-17T15:18:33.000000Z","updated_at": "2022-10-17T15:18:33.000000Z","deleted_at": null,"pbx_tenant_id": 1,"api_id": null,"linenum": null,"location": "location","macaddress": null,"protocol": "sip","pin": null,"ua_fullname": null,"ua_id": "50","ua_name": null,"cost_per_day": null,"prorate": null,"date_prorate": null,"pbxext_id": 3,"pbx_tenant_code": 42,"pbx_server_id": null,"profile_name": "Extension profile for Extension: Martins Ibazebo","profile_rate": 0.24,"price": 0.24,"idTablePivot": 1,"invoice_prorate": 0}]}'
+        headers: []
+        description: '200, Service Extensions'
+    responseFields:
+      success:
+        name: success
+        description: 'The success of the response (true or false).'
+        type: ''
+      service_extension:
+        name: service_extension
+        description: 'list of paginate items (''data'': []).'
+        type: ''

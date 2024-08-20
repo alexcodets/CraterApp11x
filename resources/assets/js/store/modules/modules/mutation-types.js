@@ -1,0 +1,5 @@
+export const BOOTSTRAP_MODULES = 'BOOTSTRAP_MODULES'
+export const ADD_MODULE = 'ADD_MODULE'
+export const UPDATE_MODULE = 'UPDATE_MODULE'
+export const DELETE_MODULE = 'DELETE_MODULE'
+export const ADD_MODULES = 'ADD_MODULES'

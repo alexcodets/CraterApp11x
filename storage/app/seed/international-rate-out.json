@@ -1,0 +1,73 @@
+[{
+    "prefix": "Hope",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "I"
+}, {
+    "prefix": "Hope Bravo (7067)",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "I"
+}, {
+    "prefix": "Hope Bravo",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "I"
+}, {
+    "prefix": "Raymond Robinson (7066)",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "T"
+}, {
+    "prefix": "+1",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "T"
+}, {
+    "prefix": "+18066721963",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}, {
+    "prefix": "+17605",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}, {
+    "prefix": "8063249707",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}, {
+    "prefix": "3183489427",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}, {
+    "prefix": "Tyrone Kwalbe (1063)",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}, {
+    "prefix": "Faith Ene (1113)",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}, {
+    "prefix": "Rukiya Joji (1166)",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}]

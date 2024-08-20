@@ -1,0 +1,496 @@
+<template>
+  <base-page class="customer-create">
+    <sw-page-header :title="$t('customers.disabled_clients')">
+      <sw-breadcrumb slot="breadcrumbs">
+        <sw-breadcrumb-item :title="$t('general.home')" to="/admin/dashboard" />
+        <sw-breadcrumb-item :title="$tc('customers.customer', 2)" to="/admin/customers" />
+        <sw-breadcrumb-item
+          :title="$tc('customers.disabled_clients')"
+          to="#"
+          active
+        />
+      </sw-breadcrumb>
+
+      <template slot="actions">
+        <sw-button
+          v-show="totalCustomers"
+          size="lg"
+          variant="primary-outline"
+          @click="toggleFilter"
+        >
+          {{ $t('general.filter') }}
+          <component :is="filterIcon" class="h-4 ml-1 -mr-1 font-bold" />
+        </sw-button>
+      </template>
+    </sw-page-header>
+
+    <slide-y-up-transition>
+      <sw-filter-wrapper v-show="showFilters">
+        <sw-input-group
+          :label="$t('customers.display_nametable')"
+          class="flex-1 mt-2"
+        >
+          <sw-input
+            v-model="filters.display_name"
+            type="text"
+            name="name"
+            class="mt-2"
+            autocomplete="off"
+          />
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('customers.contact_name')"
+          class="flex-1 mt-2 ml-0 lg:ml-6"
+        >
+          <sw-input
+            v-model="filters.contact_name"
+            type="text"
+            name="address_name"
+            class="mt-2"
+            autocomplete="off"
+          />
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('customers.phone')"
+          class="flex-1 mt-2 ml-0 lg:ml-6"
+        >
+          <sw-input
+            v-model="filters.phone"
+            type="text"
+            name="phone"
+            class="mt-2"
+            autocomplete="off"
+          />
+        </sw-input-group>
+        <label
+          class="absolute text-sm leading-snug text-black cursor-pointer"
+          style="top: 10px; right: 15px"
+          @click="clearFilter"
+          >{{ $t('general.clear_all') }}</label
+        >
+      </sw-filter-wrapper>
+    </slide-y-up-transition>
+
+    <sw-empty-table-placeholder
+      v-show="showEmptyScreen"
+      :title="$t('customers.no_customers')"
+      :description="$t('customers.list_of_customers_disabled')"
+    >
+      <astronaut-icon class="mt-5 mb-4" />
+
+      <!-- <sw-button
+        slot="actions"
+        tag-name="router-link"
+        to="/admin/customers/create"
+        size="lg"
+        variant="primary-outline"
+      >
+        {{ $t('customers.add_new_customer') }}
+      </sw-button> -->
+    </sw-empty-table-placeholder>
+
+    <div v-show="!showEmptyScreen" class="relative table-container">
+      <div
+        class="
+          relative
+          flex
+          items-center
+          justify-between
+          h-10
+          mt-5
+          border-b-2 border-gray-200 border-solid
+        "
+      >
+        <p class="text-sm">
+          {{ $t('general.showing') }}: <b>{{ customers.length }}</b>
+          {{ $t('general.of') }} <b>{{ totalCustomers }}</b>
+        </p>
+
+        <sw-transition type="fade">
+          <sw-dropdown v-if="selectedCustomers.length">
+            <span
+              slot="activator"
+              class="
+                flex
+                block
+                text-sm
+                font-medium
+                cursor-pointer
+                select-none
+                text-primary-400
+              "
+            >
+              {{ $t('general.actions') }}
+              <chevron-down-icon class="h-5" />
+            </span>
+
+            <sw-dropdown-item @click="removeMultipleCustomers">
+              <trash-icon class="h-5 mr-3 text-gray-600" />
+              {{ $t('customers.deletecustomer') }}
+            </sw-dropdown-item>
+          </sw-dropdown>
+        </sw-transition>
+      </div>
+
+      <div class="absolute z-10 items-center pl-4 mt-2 select-none md:mt-12">
+        <sw-checkbox
+          v-model="selectAllFieldStatus"
+          variant="primary"
+          size="sm"
+          class="hidden md:inline"
+          @change="selectAllCustomers"
+        />
+
+        <sw-checkbox
+          v-model="selectAllFieldStatus"
+          :label="$t('general.select_all')"
+          variant="primary"
+          size="sm"
+          class="md:hidden"
+          @change="selectAllCustomers"
+        />
+      </div>
+
+      <sw-table-component
+        ref="table"
+        :show-filter="false"
+        :data="fetchData"
+        table-class="table"
+      >
+        <sw-table-column
+          :sortable="false"
+          :filterable="false"
+          cell-class="no-click"
+        >
+          <div slot-scope="row" class="relative block">
+            <sw-checkbox
+              :id="row.id"
+              v-model="selectField"
+              :value="row.id"
+              variant="primary"
+              size="sm"
+            />
+          </div>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
+          :filterable="true"
+          :label="$t('customers.customer_number')"
+          show="customcode"
+        >
+          <template slot-scope="row">
+            <span>{{ $t('customers.customer_number') }}</span>
+              {{ row.customcode }}
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
+          :filterable="true"
+          :label="$t('customers.display_nametable')"
+          show="name"
+        >
+          <template slot-scope="row">
+            <span>{{ $t('customers.display_nametable') }}</span>
+              {{ row.name }}
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
+          :label="$t('customers.contact_name')"
+          show="contact_name"
+        >
+          <template slot-scope="row">
+            <span>{{ $t('customers.contact_name') }}</span>
+            <span>
+              {{
+                row.contact_name
+                  ? row.contact_name
+                  : $t('customers.no_contact_name')
+              }}
+            </span>
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
+          :label="$t('customers.phone')"
+          show="phone"
+        >
+          <template slot-scope="row">
+            <span>{{ $t('customers.phone') }}</span>
+            <span>
+              {{ row.phone ? row.phone : $t('customers.no_contact') }}
+            </span>
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
+          :label="$t('customers.amount_due')"
+          show="due_amount"
+        >
+          <template slot-scope="row">
+            <span> {{ $t('customers.amount_due') }} </span>
+            <div v-html="$utils.formatMoney(row.due_amount, row.currency)" />
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
+          :label="$t('customers.added_on')"
+          sort-as="created_at"
+          show="formattedCreatedAt"
+        />
+
+        <sw-table-column
+          :sortable="true"
+          :label="$t('customers.status')"
+          show="status"
+        >
+          <template slot-scope="row">
+            <span>{{ $t('customers.status') }}</span>
+            <span v-if="row.status_customer === 'A'">
+              {{ $t('customers.active') }}
+            </span>
+            <span v-else-if="row.status_customer === 'I'">
+              {{ $t('customers.inactive') }}
+            </span>
+            <span v-else>
+              {{ $t('customers.archive') }}
+            </span>
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="false"
+          :filterable="false"
+          cell-class="action-dropdown"
+        >
+          <template slot-scope="row">
+            <span> {{ $t('customers.action') }} </span>
+
+            <sw-dropdown>
+              <dot-icon slot="activator" />
+
+              <sw-dropdown-item @click="restoreCustomer(row.id)">
+                <save-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('customers.restore') }}
+              </sw-dropdown-item>
+            </sw-dropdown>
+          </template>
+        </sw-table-column>
+      </sw-table-component>
+    </div>
+  </base-page>
+</template>
+<script>
+import { mapActions, mapGetters } from 'vuex'
+import { PlusSmIcon } from '@vue-hero-icons/solid'
+import {
+  FilterIcon,
+  XIcon,
+  ChevronDownIcon,
+  TrashIcon,
+  PencilIcon,
+  EyeIcon,
+  EyeOffIcon,
+  CreditCardIcon,
+} from '@vue-hero-icons/solid'
+import AstronautIcon from '../../components/icon/AstronautIcon'
+
+export default {
+  components: {
+    AstronautIcon,
+    ChevronDownIcon,
+    PlusSmIcon,
+    FilterIcon,
+    XIcon,
+    TrashIcon,
+    PencilIcon,
+    EyeIcon,
+    EyeOffIcon,
+    CreditCardIcon,
+  },
+  data() {
+    return {
+      showFilters: false,
+      isRequestOngoing: true,
+      filters: {
+        display_name: '',
+        contact_name: '',
+        phone: '',
+        status: '',
+      },
+    }
+  },
+  computed: {
+    showEmptyScreen() {
+      return !this.totalCustomers && !this.isRequestOngoing
+    },
+    filterIcon() {
+      return this.showFilters ? 'x-icon' : 'filter-icon'
+    },
+    ...mapGetters('customer', [
+      'customers',
+      'selectedCustomers',
+      'totalCustomers',
+      'selectAllField',
+    ]),
+    selectField: {
+      get: function () {
+        return this.selectedCustomers
+      },
+      set: function (val) {
+        this.selectCustomer(val)
+      },
+    },
+    selectAllFieldStatus: {
+      get: function () {
+        return this.selectAllField
+      },
+      set: function (val) {
+        this.setSelectAllState(val)
+      },
+    },
+  },
+  watch: {
+    filters: {
+      handler: 'setFilters',
+      deep: true,
+    },
+  },
+  destroyed() {
+    if (this.selectAllField) {
+      this.selectAllCustomers()
+    }
+  },
+  methods: {
+    ...mapActions('customer', [
+      'fetchCustomersDisabled',
+      'selectAllCustomers',
+      'selectCustomer',
+      'deleteCustomer',
+      'deleteMultipleCustomers',
+      'setSelectAllState',
+      'customerRestore'
+    ]),
+    ...mapActions('notification', ['showNotification']),
+    refreshTable() {
+      this.$refs.table.refresh()
+    },
+    async fetchData({ page, filter, sort }) {
+      let data = {
+        display_name: this.filters.display_name,
+        contact_name: this.filters.contact_name,
+        phone: this.filters.phone,
+        status_customer: this.filters.status ? this.filters.status.value : '',
+        orderByField: sort.fieldName || 'created_at',
+        orderBy: sort.order || 'desc',
+        page,
+      }
+
+      
+      this.isRequestOngoing = true
+      let response = await this.fetchCustomersDisabled(data)
+      this.isRequestOngoing = false
+
+      return {
+        data: response.data.customers.data,
+        pagination: {
+          totalPages: response.data.customers.last_page,
+          currentPage: page,
+        },
+      }
+    },
+    setFilters() {
+      this.refreshTable()
+    },
+    clearFilter() {
+      this.filters = {
+        display_name: '',
+        contact_name: '',
+        phone: '',
+        status: '',
+      }
+      if (this.filters.status) {
+        this.$refs.statusSelect.$refs.baseSelect.removeElement(
+          this.filters.status
+        )
+      }
+    },
+    toggleFilter() {
+      if (this.showFilters) {
+        this.clearFilter()
+      }
+
+      this.showFilters = !this.showFilters
+    },
+    onSelectStatus(status) {
+      this.filters.status = status
+    },
+    async clearStatusSearch(removedOption, id) {
+      this.filters.status = ''
+      this.refreshTable()
+    },
+    async restoreCustomer(id) {
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$tc('customers.confirm_restore'),
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result) {
+          let res = await this.customerRestore(id)
+
+          if (res.data.type === 'success') {
+            window.toastr['success'](this.$tc('customers.restore_message'))
+            this.$refs.table.refresh()
+            return true
+          }
+
+          window.toastr[res.data.type](res.data.message)
+          return true
+        }
+      })
+    },
+
+    async removeMultipleCustomers() {
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$tc('customers.confirm_delete', 2),
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          let request = await this.deleteMultipleCustomers()
+          if (request.data.success) {
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('customers.deleted_message', 2),
+            })
+            this.refreshTable()
+          } else if (request.data.error) {
+            this.showNotification({
+              type: 'error',
+              message: request.data.message,
+            })
+          }
+        }
+      })
+    },
+  },
+}
+</script>

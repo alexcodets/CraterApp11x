@@ -1,0 +1,82 @@
+<?php
+
+use Twig\Environment;
+use Twig\Source;
+
+/* table/relation/dropdown_generate.twig */
+class __TwigTemplate_6af5265cb3ad6e0b370283e04bb07bd6b31c0721fcdb9e3dada8903e75f34eca extends \Twig\Template
+{
+    private $source;
+
+    private $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->parent = false;
+
+        $this->blocks = [
+        ];
+    }
+
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 1
+        ((! twig_test_empty(($context["dropdown_question"] ?? null))) ? (print (twig_escape_filter($this->env, ($context["dropdown_question"] ?? null), "html", null, true))) : (print ("")));
+        // line 2
+        echo "<select name=\"";
+        echo twig_escape_filter($this->env, ($context["select_name"] ?? null), "html", null, true);
+        echo "\">
+";
+        // line 3
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(($context["choices"] ?? null));
+        foreach ($context['_seq'] as $context["one_value"] => $context["one_label"]) {
+            // line 4
+            echo "    <option value=\"";
+            echo twig_escape_filter($this->env, $context["one_value"], "html", null, true);
+            echo "\"";
+            // line 5
+            if ((($context["selected_value"] ?? null) == $context["one_value"])) {
+                echo " selected=\"selected\"";
+            }
+            echo ">
+        ";
+            // line 6
+            echo twig_escape_filter($this->env, $context["one_label"], "html", null, true);
+            echo "
+    </option>
+";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['one_value'], $context['one_label'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 9
+        echo "</select>
+";
+    }
+
+    public function getTemplateName()
+    {
+        return "table/relation/dropdown_generate.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return  [  67 => 9,  58 => 6,  52 => 5,  48 => 4,  44 => 3,  39 => 2,  37 => 1,];
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("", "table/relation/dropdown_generate.twig", "/home/cbdev/crater/public/phpmyadmin/templates/table/relation/dropdown_generate.twig");
+    }
+}

@@ -1,0 +1,103 @@
+{
+    "name": "bytefury/crater",
+    "description": "Free & Open Source Invoice App for Freelancers & Small Businesses. https://craterapp.com",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^8.3",
+        "ext-curl": "*",
+        "ext-http": "*",
+        "ext-json": "*",
+        "authorizenet/authorizenet": "^2.0",
+        "aws/aws-sdk-php": "^3.142",
+        "barryvdh/laravel-dompdf": "^2.2",
+        "desolatormagno/laravel-msg": "dev-master",
+        "doctrine/dbal": "^3.5",
+        "guzzlehttp/guzzle": "^7.8",
+        "intervention/image": "^2.3",
+        "laravel/framework": "^11.20",
+        "laravel/helpers": "^1.7",
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.9",
+        "laravel/ui": "^4.4",
+        "league/flysystem": "^3.8.0",
+        "league/flysystem-aws-s3-v3": "^3.0",
+        "league/omnipay": "^3.2",
+        "maatwebsite/excel": "^3.1",
+        "mavinoo/laravel-batch": "^2.3",
+        "omnipay/paypal": "dev-test-ghactions",
+        "omnipay/stripe": "^3.2",
+        "spatie/flysystem-dropbox": "^3.0",
+        "spatie/laravel-backup": "^8.6",
+        "spatie/laravel-medialibrary": "^11.3",
+        "spatie/laravel-permission": "^6.2",
+        "spatie/laravel-query-builder": "^5.8",
+        "stripe/stripe-php": "^15.2",
+        "vinkla/hashids": "^12.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.0",
+        "beyondcode/laravel-dump-server": "^2.0",
+        "fakerphp/faker": "^1.23",
+        "itsgoingd/clockwork": "^5.1",
+        "jasonmccreary/laravel-test-assertions": "^2.4",
+        "knuckleswtf/scribe": "^4.33",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+"phpunit/phpunit": "^11.0.1"
+    },
+    "repositories": [],
+    "autoload": {
+        "psr-4": {
+            "Crater\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "app/Space/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "platform": {
+            "php": "8.3.10"
+        },
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    }
+}

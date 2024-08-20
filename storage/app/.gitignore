@@ -1,0 +1,7 @@
+*
+!public/
+!seed/*
+!/seed
+!reports/
+!reports/invoices/
+!.gitignore

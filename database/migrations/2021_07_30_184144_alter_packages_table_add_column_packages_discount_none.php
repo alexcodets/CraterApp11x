@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class () extends Migration {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up(): void
+    {
+        Schema::table('packages', function (Blueprint $table) {
+            $table->boolean('packages_discount_none')->default(0)->nullable()
+                ->after('packages_discount');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down(): void
+    {
+        Schema::table('packages', function (Blueprint $table) {
+            $table->dropColumn(['packages_discount_none']);
+        });
+    }
+};

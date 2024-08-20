@@ -1,0 +1,6 @@
+* text=auto
+*.css linguist-vendored
+*.scss linguist-vendored
+.js !text !filter !merge !diff
+*.js.map filter=lfs diff=lfs merge=lfs -text
+*.map filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,511 @@
+<template>
+  <!-- Base  -->
+  <div>
+    <!-- Header  -->
+    <sw-page-header
+      class="mb-3"
+      :title="$t('tickets.departaments.view_departaments')"
+    >
+      <sw-breadcrumb slot="breadcrumbs">
+        <sw-breadcrumb-item to="/admin/dashboard" :title="$t('general.home')" />
+        <sw-breadcrumb-item
+          to="/admin/tickets/departaments"
+          :title="$t('tickets.menu_title.departaments')"
+        />
+        <!--    <sw-breadcrumb-item to="#" :title="itemGroup ? itemGroup.name : ''" active/>  -->
+      </sw-breadcrumb>
+      <template slot="actions">
+        <sw-button
+          @click="backButton"
+          type="button"
+          class="mr-3"
+          variant="primary-outline"
+        >
+          {{ $t('general.back') }}
+        </sw-button>
+        <sw-button
+          tag-name="router-link"
+          :to="`/admin/tickets/departaments/${$route.params.id}/edit`"
+          class="mr-3"
+          variant="primary-outline"
+        >
+          <pencil-icon class="h-5 mr-3 text-gray-600" />
+          {{ $t('general.edit') }}
+        </sw-button>
+        <sw-button
+          slot="activator"
+          variant="primary"
+          @click="removeticketdepart($route.params.id)"
+        >
+          <trash-icon class="h-5 mr-3 text-gray-600" />
+          {{ $t('general.delete') }}
+        </sw-button>
+      </template>
+    </sw-page-header>
+
+    <sw-card>
+      <div class="col-span-12">
+        <p class="text-gray-500 uppercase sw-section-title">
+          {{ $t('item_groups.basic_info') }}
+        </p>
+        <div class="grid grid-cols-1 gap-4 mt-5">
+          <div>
+            <p
+              class="mb-1 text-sm font-normal leading-5 non-italic text-primary-800"
+            >
+              Name
+            </p>
+            <p class="text-sm font-bold leading-5 text-black non-italic">
+              {{ ticketDepart ? ticketDepart.name : '' }}
+            </p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-4 mt-5">
+          <div>
+            <p
+              class="mb-1 text-sm font-normal leading-5 non-italic text-primary-800"
+            >
+              {{ $t('general.description') }}
+            </p>
+            <p
+              class="text-sm font-bold leading-5 text-black non-italic"
+              v-html="ticketDepart ? ticketDepart.description : ''"
+            >
+              {{ ticketDepart ? ticketDepart.description : '' }}
+            </p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-4 mt-5">
+          <div>
+            <p
+              class="mb-1 text-sm font-normal leading-5 non-italic text-primary-800"
+            >
+              Email
+            </p>
+            <p class="text-sm font-bold leading-5 text-black non-italic">
+              {{ ticketDepart ? ticketDepart.email : '' }}
+            </p>
+          </div>
+        </div>
+        <!-- Oculto -->
+        <div v-if="contenido">
+          <div class="grid grid-cols-1 gap-4 mt-5">
+            <div>
+              <p
+                class="mb-1 text-sm font-normal leading-5 non-italic text-primary-800"
+              >
+                Default Priority
+              </p>
+              <p
+                v-if="band"
+                class="text-sm font-bold leading-5 text-black non-italic"
+              >
+                {{ ticketDepart.default_priority.text }}
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-4 mt-5">
+            <div>
+              <p
+                class="mb-1 text-sm font-normal leading-5 non-italic text-primary-800"
+              >
+                Email handling
+              </p>
+              <p
+                v-if="band"
+                class="text-sm font-bold leading-5 text-black non-italic"
+              >
+                {{ ticketDepart.email_handling.text }}
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-4 mt-5">
+            <div>
+              <p
+                class="mb-1 text-sm font-normal leading-5 non-italic text-primary-800"
+              >
+                Automatically Close Tickets
+              </p>
+              <p class="text-sm font-bold leading-5 text-black non-italic">
+                {{
+                  ticketDepart ? ticketDepart.automatically_close + ' Days' : ''
+                }}
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-4 mt-5">
+            <div>
+              <p
+                class="mb-1 text-sm font-normal leading-5 non-italic text-primary-800"
+              >
+                Automatically Delete Tickets
+              </p>
+              <p class="text-sm font-bold leading-5 text-black non-italic">
+                {{
+                  ticketDepart
+                    ? ticketDepart.automatically_delete + ' Days'
+                    : ''
+                }}
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-4 mt-5">
+            <div>
+              <p
+                class="mb-1 text-sm font-normal leading-5 non-italic text-primary-800"
+              >
+                Status
+              </p>
+              <p
+                v-if="band"
+                class="text-sm font-bold leading-5 text-black non-italic"
+              >
+                {{ ticketDepart.status.text }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <sw-divider class="my-8" />
+
+        <p class="text-gray-500 uppercase sw-section-title">USERS</p>
+
+        <!-- USERS -->
+        <sw-empty-table-placeholder
+          v-show="showEmptyTable"
+          :title="$t('tickets.departaments.no_users')"
+          :description="$t('tickets.departaments.list_of_users')"
+        >
+        </sw-empty-table-placeholder>
+
+        <div class="relative table-container" v-show="!showEmptyTable">
+          <sw-table-component
+            ref="table"
+            :data="fetchUsers"
+            :show-filter="false"
+            table-class="table"
+          >
+            <sw-table-column
+              :sortable="true"
+              :label="$t('users.name')"
+              show="name"
+            >
+              <template slot-scope="row">
+                <span>{{ $t('users.name') }}</span>
+                <span>{{ row.name }}</span>
+              </template>
+            </sw-table-column>
+
+            <sw-table-column
+              :sortable="true"
+              :label="$t('users.email')"
+              show="email"
+            />
+
+            <sw-table-column
+              :sortable="true"
+              :label="$t('users.phone')"
+              show="phone"
+            >
+              <template slot-scope="row">
+                <span>{{ $t('users.phone') }}</span>
+                <span>{{ row.phone ? row.phone : 'No Contact' }} </span>
+              </template>
+            </sw-table-column>
+
+            <sw-table-column
+              :sortable="true"
+              :label="$t('users.added_on')"
+              sort-as="created_at"
+              show="formattedCreatedAt"
+            />
+
+            <sw-table-column
+              :sortable="true"
+              :label="$t('users.role')"
+              show="role2"
+            >
+              <template slot-scope="row">
+                <span>{{ $t('users.role') }}</span>
+                <span>{{ row.role2 ? row.role2 : 'No Role' }} </span>
+              </template>
+            </sw-table-column>
+          </sw-table-component>
+        </div>
+
+        <sw-divider class="my-8" />
+
+        <p class="text-gray-500 uppercase sw-section-title">TICKETS</p>
+
+        <!-- TICKETS -->
+        <sw-empty-table-placeholder
+          v-show="showEmptyTableTickets"
+          :title="$t('customer_ticket.no_customer_ticket')"
+          :description="$t('customer_ticket.list_of_customer_ticket')"
+        >
+        </sw-empty-table-placeholder>
+
+        <div class="relative table-container" v-show="!showEmptyTableTickets">
+          <sw-table-component
+            ref="table"
+            :data="fetchTickets"
+            :show-filter="false"
+            table-class="table"
+          >
+            <sw-table-column
+              :sortable="true"
+              :label="$t('customer_ticket.summary')"
+              show="summary"
+            >
+              <template slot-scope="row">
+                <span>{{ $t('customer_ticket.summary') }}</span>
+
+                <router-link
+                  :to="`main/${row.user_id}/${row.id}/view-ticket`"
+                  class="font-medium text-primary-500"
+                >
+                  {{ row.summary }}
+                </router-link>
+              </template>
+            </sw-table-column>
+
+            <sw-table-column
+              :sortable="true"
+              :label="$t('customer_ticket.departament')"
+              show="departament"
+            >
+              <template slot-scope="row">
+                <span>{{ $t('customer_ticket.departament') }}</span>
+                {{ row.departament }}
+              </template>
+            </sw-table-column>
+
+            <sw-table-column
+              :sortable="true"
+              :label="$t('customer_ticket.assignedTo')"
+              show="assigned"
+            >
+              <template slot-scope="row">
+                <span>{{ $t('customer_ticket.assignedTo') }}</span>
+                {{ row.assigned }}
+              </template>
+            </sw-table-column>
+
+            <sw-table-column
+              :sortable="true"
+              :label="$t('customer_ticket.status')"
+              show="status"
+            >
+              <template slot-scope="row">
+                <span>{{ $t('customer_ticket.status') }}</span>
+               
+              <div v-if="row.status == 'S' ">
+                <sw-badge :bg-color="$utils.getBadgeStatusColor('OVERDUE').bgColor"
+                :color="$utils.getBadgeStatusColor('OVERDUE').color" class="px-3 py-1">
+                {{ getStatus(row.status) }}
+              </sw-badge>
+            </div>
+
+
+            <div v-if="row.status == 'C' ">
+                <sw-badge :bg-color="$utils.getBadgeStatusColor('UNPAID').bgColor"
+                :color="$utils.getBadgeStatusColor('UNPAID').color" class="px-3 py-1">
+                {{ getStatus(row.status) }}
+              </sw-badge>
+            </div>
+
+            <div v-if="row.status == 'I' ">
+                <sw-badge :bg-color="$utils.getBadgeStatusColor('VIEWED').bgColor"
+                :color="$utils.getBadgeStatusColor('VIEWED').color" class="px-3 py-1">
+                {{ getStatus(row.status) }}
+              </sw-badge>
+            </div>
+
+            
+            <div v-if="row.status == 'O' ">
+                <sw-badge :bg-color="$utils.getBadgeStatusColor('SENT').bgColor"
+                :color="$utils.getBadgeStatusColor('SENT').color" class="px-3 py-1">
+                {{ getStatus(row.status) }}
+              </sw-badge>
+            </div>
+
+            <div v-if="row.status == 'M' ">
+                <sw-badge :bg-color="$utils.getBadgeStatusColor('COMPLETED').bgColor"
+                :color="$utils.getBadgeStatusColor('COMPLETED').color" class="px-3 py-1">
+                {{ getStatus(row.status) }}
+              </sw-badge>
+            </div>
+              </template>
+            </sw-table-column>
+
+            <sw-table-column
+              :sortable="true"
+              :label="$t('payments.date')"
+              sort-as="created_at"
+              show="formattedCustomerNoteDate"
+            />
+          </sw-table-component>
+        </div>
+      </div>
+    </sw-card>
+  </div>
+</template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex'
+import {
+  PencilIcon,
+  TrashIcon,
+  RefreshIcon,
+  FilterIcon,
+  XIcon,
+  EyeIcon,
+} from '@vue-hero-icons/outline'
+
+export default {
+  components: {
+    PencilIcon,
+    TrashIcon,
+    RefreshIcon,
+    FilterIcon,
+    XIcon,
+    EyeIcon,
+  },
+
+  data() {
+    return {
+      contenido: false,
+      band: false,
+      ticketDepart: {
+        items: [],
+      },
+
+      users: [],
+      tickets: [],
+    }
+  },
+  computed: {
+    ...mapGetters('ticketDepartament', ['selectedViewDepartament']),
+
+    ...mapGetters('company', ['defaultCurrency']),
+
+    showEmptyTable() {
+      return !this.users.length
+    },
+
+    showEmptyTableTickets() {
+      return !this.tickets.length
+    },
+  },
+  created() {
+    this.loadticketDepart()
+  },
+  methods: {
+    ...mapActions('ticketDepartament', [
+      'fetchViewDepartament',
+      'deleteDepartament',
+      'getUsersByDepartment',
+      'getTicketsByDepartment',
+    ]),
+
+    async loadticketDepart() {
+      Promise.all([
+        this.fetchViewDepartament({ id: this.$route.params.id }),
+      ]).then(async ([res1]) => {
+        if (res1.data) {
+          if (res1.status == 200) {
+            // console.log("Res 1, ", res1.data)
+            this.ticketDepart = res1.data.departaments
+            this.band = true
+          }
+        }
+      })
+    },
+
+    async fetchUsers({ page, filter, sort }) {
+      let data = {
+        id: this.$route.params.id,
+        orderByField: sort.fieldName || 'created_at',
+        orderBy: sort.order || 'desc',
+        page,
+      }
+
+      let response = await this.getUsersByDepartment(data)
+      this.users = response.data.users.data
+
+      return {
+        data: this.users,
+        pagination: {
+          totalPages: response.data.users.last_page,
+          currentPage: page,
+        },
+      }
+    },
+
+    async fetchTickets({ page, filter, sort }) {
+      let data = {
+        id: this.$route.params.id,
+        orderByField: sort.fieldName || 'created_at',
+        orderBy: sort.order || 'desc',
+        page,
+      }
+
+      let response = await this.getTicketsByDepartment(data)
+      this.tickets = response.data.tickets.data
+
+      return {
+        data: this.tickets,
+        pagination: {
+          totalPages: response.data.tickets.last_page,
+          currentPage: page,
+        },
+      }
+    },
+
+    getStatus(status) {
+      if (status === 'S') {
+        return 'Awaiting Staff Reply'
+      }
+      if (status === 'C') {
+        return 'Awaiting Client Reply'
+      }
+      if (status === 'I') {
+        return 'In Progress'
+      }
+      if (status === 'O') {
+        return 'On Hold'
+      }
+      if (status === 'M') {
+        return 'Completed'
+      }
+    },
+
+    async removeticketdepart(id) {
+      this.id = id
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$tc('items.confirm_delete'),
+        icon: '/assets/icon/trash-solid.svg',
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          let res = await this.deleteDepartament({ ids: [id] })
+
+          if (res.data.success) {
+            window.toastr['success'](
+              this.$tc('tickets.departaments.deleted_message', 1)
+            )
+            this.$router.push('/admin/tickets/departaments')
+          }
+          return true
+        }
+      })
+    },
+
+    backButton() {
+      this.$utils.cancelFormOrBack(this, this.$router, 'back')
+    },
+  },
+}
+</script>

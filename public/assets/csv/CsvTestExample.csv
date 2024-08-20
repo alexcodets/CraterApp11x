@@ -1,0 +1,41 @@
+InvoiceNo,CustomerNumber,Customer,InvoiceDate,DueDate,Notes,Status,PaidStatus,TaxPerItem,DiscountPerItem,Subtotal,DiscountType,DiscountVal,Discounts,TotalTax,Total,AmountDue,PbxServiceNumber,ServiceNumber,ServicePeriodFrom,ServicePeriodTo,ItemType,ItemNumber,Item(Product/Service),ItemDescription,ItemQuantity,ItemRate,ItemDiscountType,ItemDiscountVal,ItemDiscount,ItemAmount,TaxName,TaxPercentage,TaxAmount,TaxItem
+INV-0070179,POP-000100,Oak Furniture LLC,2024-02-25,2024-03-25,,SENT,UNPAID,NO,YES,258,fixed,0,0,85.14,343.14,343.14,,,,,Item,ITEM-00011,Wood,Store Item,18,4.87,fixed,2,2,85.66,CDR TX,33,28.27,
+INV-0070179,,,,,,,,,,,,,,,,,,,,,Item,ITEM-00010,Table,Store Item,4,16.93,fixed,8,8,59.72,CDR TX,33,19.71,
+INV-0070179,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0009,Couch,Store Item,2,20.1,fixed,4,4,36.2,CDR TX,33,11.95,
+INV-0070179,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0008,Chair,Store Item,6,10.4,fixed,3,3,59.4,CDR TX,33,19.6,
+INV-0070187,POP-000100,Oak Furniture LLC,2024-02-25,2024-03-25,,SENT,UNPAID,YES,YES,688,fixed,0,0,227.04,915.04,915.04,,,,,Item,ITEM-00011,Wood,Store Item,30,5.24,fixed,2,2,155.2,CDR TX,33,51.22,Wood
+INV-0070187,,,,,,,,,,,,,,,,,,,,,Item,ITEM-00010,Table,Store Item,13,14.1,fixed,8,8,175.3,CDR TX,33,57.85,Table
+INV-0070187,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0009,Couch,Store Item,5,15.89,fixed,4,4,75.45,CDR TX,33,24.9,Couch
+INV-0070187,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0008,Chair,Store Item,17,12.76,fixed,3,3,213.92,CDR TX,33,70.59,Chair
+INV-0070199,POP-000100,Oak Furniture LLC,2024-02-25,2024-03-25,,SENT,UNPAID,YES,YES,1283,fixed,0,0,423.39,1656.39,1656.39,,,,,Item,ITEM-00011,Wood,Store Item,14,4.5,fixed,2,2,61,CDR TX,33,20.13,Wood
+INV-0070199,,,,,,,,,,,,,,,,,,,,,Item,ITEM-00010,Table,Store Item,18,12.8,fixed,8,8,222.4,CDR TX,33,73.39,Table
+INV-0070199,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0009,Couch,Store Item,22,23.54,fixed,4,4,513.88,CDR TX,33,169.58,Couch
+INV-0070199,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0008,Chair,Store Item,46,12.24,fixed,3,3,560.04,CDR TX,33,184.81,Chair
+INV-0070212,POP-000100,Oak Furniture LLC,2024-02-25,2024-03-25,,SENT,UNPAID,NO,YES,1238,fixed,0,0,408.54,1596.54,1596.54,,,,,Item,ITEM-00011,Wood,Store Item,18,3.56,fixed,2,2,62.08,CDR TX,33,20.49,
+INV-0070212,,,,,,,,,,,,,,,,,,,,,Item,ITEM-00010,Table,Store Item,28,19.03,fixed,8,8,524.84,CDR TX,33,173.2,
+INV-0070212,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0009,Couch,Store Item,30,23.98,fixed,4,4,715.4,CDR TX,33,236.08,
+INV-0070212,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0008,Chair,Store Item,36,7.92,fixed,3,3,282.12,CDR TX,33,93.1,
+INV-0070219,POP-000100,Oak Furniture LLC,2024-02-25,2024-03-25,,SENT,UNPAID,NO,YES,1968.78,fixed,0,0,649.7,2568.48,2568.48,,,,,Item,ITEM-00011,Wood,Store Item,16,4.33,fixed,2,2,67.28,CDR TX,33,22.2,
+INV-0070219,,,,,,,,,,,,,,,,,,,,,Item,ITEM-00010,Table,Store Item,36,21.45,fixed,8,8,764.2,CDR TX,33,252.19,
+INV-0070219,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0009,Couch,Store Item,35,26.64,fixed,4,4,928.4,CDR TX,33,306.37,
+INV-0070219,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0008,Chair,Store Item,26,8.15,fixed,3,3,208.9,CDR TX,33,68.94,
+INV-0070239,POP-000100,Oak Furniture LLC,2024-02-25,2024-03-25,,SENT,UNPAID,NO,YES,1634.28,fixed,0,0,539.31,2123.59,2123.59,,,,,Item,ITEM-00011,Wood,Store Item,16,3.76,fixed,2,2,58.16,CDR TX,33,19.19,
+INV-0070239,,,,,,,,,,,,,,,,,,,,,Item,ITEM-00010,Table,Store Item,36,22.16,fixed,8,8,789.76,CDR TX,33,260.62,
+INV-0070239,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0009,Couch,Store Item,27,19.48,fixed,4,4,521.96,CDR TX,33,172.25,
+INV-0070239,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0008,Chair,Store Item,28,9.55,fixed,3,3,264.4,CDR TX,33,87.25,
+INV-0070240,POP-000100,Oak Furniture LLC,2024-02-25,2024-03-25,,SENT,UNPAID,NO,YES,1383.9,fixed,0,0,456.69,1790.59,1790.59,,,,,Item,ITEM-00011,Wood,Store Item,20,3.03,fixed,2,2,58.6,CDR TX,33,19.34,
+INV-0070240,,,,,,,,,,,,,,,,,,,,,Item,ITEM-00010,Table,Store Item,26,13.66,fixed,8,8,347.16,CDR TX,33,114.56,
+INV-0070240,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0009,Couch,Store Item,30,18.23,fixed,4,4,542.9,CDR TX,33,179.16,
+INV-0070240,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0008,Chair,Store Item,44,9.96,fixed,3,3,435.24,CDR TX,33,143.63,
+INV-0070250,POP-000100,Oak Furniture LLC,2024-02-25,2024-03-25,,SENT,UNPAID,NO,YES,1497.05,fixed,0,0,494.03,1941.08,1941.08,,,,,Item,ITEM-00011,Wood,Store Item,22,3.3,fixed,2,2,70.6,CDR TX,33,23.3,
+INV-0070250,,,,,,,,,,,,,,,,,,,,,Item,ITEM-00010,Table,Store Item,25,18.63,fixed,8,8,457.75,CDR TX,33,151.06,
+INV-0070250,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0009,Couch,Store Item,30,24.81,fixed,4,4,740.3,CDR TX,33,244.3,
+INV-0070250,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0008,Chair,Store Item,26,8.9,fixed,3,3,228.4,CDR TX,33,75.37,
+INV-0070252,POP-000100,Oak Furniture LLC,2024-02-25,2024-03-25,,SENT,UNPAID,NO,YES,1773.53,fixed,0,0,585.26,2308.79,2308.79,,,,,Item,ITEM-00011,Wood,Store Item,22,2.78,fixed,2,2,59.16,CDR TX,33,19.52,
+INV-0070252,,,,,,,,,,,,,,,,,,,,,Item,ITEM-00010,Table,Store Item,28,19.16,fixed,8,8,528.48,CDR TX,33,174.4,
+INV-0070252,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0009,Couch,Store Item,33,26.59,fixed,4,4,873.47,CDR TX,33,288.25,
+INV-0070252,,,,,,,,,,,,,,,,,,,,,Item,ITEM-0008,Chair,Store Item,42,7.51,fixed,3,3,312.42,CDR TX,33,103.1,
+INV-0070259,POP-000100,Care One Communications - Test,2024-02-25,2024-03-25,Invoice created from services PBXS-0182 - Pag vois con avalara,SENT,UNPAID,NO,YES,149.94,fixed,0,0,22.35,179.43,179.43,PBXS-0198,,2024-02-25,2024-03-25,Item,ITEM-000159,Item para Store,Item para Store 1,1,10,fixed,2,2,8,CDR TX,5,10,
+INV-0070259,,,,,,,,,,,,,,,,,,,,,Item,ITEM-000158,Internet Service Secondary LTE Backup,,2,40,percentage,10,4,72,CDR TX,10,10,
+INV-0070259,,,,,,,,,,,,,,,,,,,,,Pbxservice,,PBXSEXTENSION,Webinar,1,50,fixed,0,0,50,CDR TX,1,9,
+INV-0070259,,,,,,,,,,,,,,,,,,,,,Pbxservice,,PBXSDID,Course Info,1,9,fixed,0,0,9,CDR TX,4,4,

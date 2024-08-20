@@ -1,0 +1,73 @@
+[{
+    "prefix": "14055638973",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}, {
+    "prefix": "1405563",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "I"
+}, {
+    "prefix": "1405",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "I"
+}, {
+    "prefix": "191",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "T"
+}, {
+    "prefix": "19139812524",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "T"
+}, {
+    "prefix": "1913",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}, {
+    "prefix": "19132014618",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}, {
+    "prefix": "19103791754",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}, {
+    "prefix": "19139812524",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "T"
+}, {
+    "prefix": "1214",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "I"
+}, {
+    "prefix": "+15",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "T"
+}, {
+    "prefix": "+14",
+    "rate_per_minute": 0.13,
+    "status": "A",
+    "company_id": 1,
+    "category": "C"
+}]

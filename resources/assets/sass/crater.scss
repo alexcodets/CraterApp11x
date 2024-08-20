@@ -1,0 +1,82 @@
+:root {
+    --primary-color-50:  #F7F6FD;
+    --primary-color-100: #EEEEFB;
+    --primary-color-200: #D5D4F5;
+    --primary-color-300: #BCB9EF;
+    --primary-color-400: #8A85E4;
+    --primary-color-500: #5851D8;
+    --primary-color-600: #4F49C2;
+    --primary-color-700: #353182;
+    --primary-color-800: #282461;
+    --primary-color-900: #1A1841;
+}
+  
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+// Plugins
+//----------------------------------
+@import '../../../node_modules/toastr/toastr';
+// Base Components
+//----------------------------------
+@import 'components/v-tooltips.scss';
+// Components
+//----------------------------------
+@import 'components/pace-loader';
+@import 'components/animation';
+.swal-icon--custom {
+    height: 80px;
+    width: 80px;
+}
+
+.swal-button--confirm {
+ background-color: #5851D8;
+ color: #fff;
+ border: none;
+ box-shadow: none;
+ border-radius: 5px;
+ font-weight: 600;
+ font-size: 14px;
+ padding: 10px 24px;
+ margin: 0;
+ cursor: pointer;
+}
+
+.swal-button--confirm:hover {
+  background-color: #5851D8 !important;
+  --tw-bg-opacity:  0.75;
+}
+
+.texto-customer {
+    max-width: 480px;
+}
+
+@media (max-width: 768px) {
+    .table-component .sw-dropdown {
+        position: absolute;
+        visibility: visible;
+        top: 15px;
+        right: 10px;
+    }
+    // Titulo de customer
+    .texto-customer {
+        max-width: 225px;
+    }
+    // agrandar espacio de tabla
+    .table-component td:first-child {
+        height: 100px !important;
+    }
+    // permite dvidir texto sin romper tablas
+    .boxtext {
+        inline-size: 150px;
+        overflow-wrap: break-word;
+    }
+    .table-wrapper {
+        overflow-x: auto; //allows the div to scroll horizontally only when the div overflows.
+        overflow-y: hidden; //does not allow for the div to scroll vertically
+    }
+}
+
+.sw-scroll::-webkit-scrollbar {
+    width: 8px;
+}
