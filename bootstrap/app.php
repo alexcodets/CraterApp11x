@@ -54,11 +54,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'customer' => \Crater\Http\Middleware\CustomerMiddleware::class,
             'guest' => \Crater\Http\Middleware\RedirectIfAuthenticated::class,
             'install' => \Crater\Http\Middleware\InstallationMiddleware::class,
-            'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'redirect-if-installed' => \Crater\Http\Middleware\RedirectIfInstalled::class,
             'redirect-if-unauthenticated' => \Crater\Http\Middleware\RedirectIfUnauthorized::class,
-            'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
-            'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
 
         $middleware->priority([
