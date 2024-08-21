@@ -27,16 +27,28 @@ class DatabaseSeeder extends Seeder
         if (config('app.env') == 'local' || config('app.env') == 'debug' || config('app.env') == 'testing') {
             $this->call([
                 ModulesSeeder::class,
-                AvalaraServiceTypesSeeder::class,
                 InvoiceTemplateSeeder::class,
                 EstimateTemplateSeeder::class,
-                PbxPackageServerSeeder::class,
-                AvalaraTaxSeeder::class,
                 CustomerPackageSeeder::class,
-                PbxDidAndExtSeeder::class,
                 InternationalRateSeeder::class,
                 DemoSeeder::class,
             ]);
+
+            //For specific use.
+
+            //Avalara
+//            $this->call([
+//                AvalaraServiceTypesSeeder::class,
+//                AvalaraTaxSeeder::class,
+//            ]);
+
+            //Pbx
+//            $this->call([
+//                PbxPackageServerSeeder::class,
+//                PbxDidAndExtSeeder::class,
+//                InternationalRateSeeder::class,
+//            ]);
+
 
 //            $this->call([
 //                PbxServicesSeeder::class,
