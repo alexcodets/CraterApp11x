@@ -6,6 +6,7 @@ services:
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
+                #NODE_VERSION: '20'
         image: sail-8.3/app
         extra_hosts:
             - 'host.docker.internal:host-gateway'
@@ -28,7 +29,7 @@ services:
         #container_name: '${SAIL_DB_NAME}'
         image: 'mysql/mysql-server:5.7'
         ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
+            - '${DB_FORWARD_PORT:-3306}:3306'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ROOT_HOST: '%'
