@@ -7,6 +7,7 @@ use Crater\Http\Requests\ExtensionUpdateRequest;
 use Crater\Models\PbxExtensions;
 use Crater\Models\PbxTenant;
 use Crater\Pbxware\PbxWareApi;
+use Log;
 
 class ExtensionUpdate
 {
@@ -15,13 +16,12 @@ class ExtensionUpdate
         try {
             $api = new PbxWareApi($tenant->pbxServer);
             $details = $api->extensionConfiguration($tenant->tenantid, $ext->pbxext_id);
-            $ua = null;
 
             if ($ext->ua_id != $request->ua_id) {
 
                 // Registrar el tenantid y ua_id para depuración
-                \Log::debug('Tenant ID:', ['tenantid' => $tenant->tenantid]);
-                \Log::debug('UA ID:', ['ua_id' => $request->ua_id]);
+                Log::debug('Tenant ID:', ['tenantid' => $tenant->tenantid]);
+                Log::debug('UA ID:', ['ua_id' => $request->ua_id]);
 
                 // Obtener los dispositivos del agente de usuario
                 $ua = $api->getUserAgentDevices($tenant->tenantid);
@@ -31,7 +31,7 @@ class ExtensionUpdate
                     return $ua;
                 }
                 $ua = $ua['data'][$request->ua_id] ?? null;
-                \Log::debug('Specific User Agent Device:', ['ua' => $ua]);
+                Log::debug('Specific User Agent Device:', ['ua' => $ua]);
                 if (is_null($ua)) {
                     return [
                         'success' => false,
@@ -51,7 +51,7 @@ class ExtensionUpdate
             $request->merge(['pbxext_id' => $ext->pbxext_id, 'server' => $tenant->tenantid, 'codecs' => $details['data'][$ext->pbxext_id]['options']['allow']]);
 
             $values = ExtensionDO::fromRequestToApi($request);
-            \Log::debug('Before api');
+            Log::debug('Before api');
             $response = $api->extensionUpdate($tenant->tenantid, $values);
             //$details['data'][3]['options']['allow']
             if ($response['success']) {

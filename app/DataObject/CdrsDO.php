@@ -14,7 +14,7 @@ class CdrsDO
         $this->rebuildCdrs($cdrs);
     }
 
-    public function rebuildCdrs($cdrs)
+    public function rebuildCdrs(array $cdrs): array
     {
         $this->cdrs = [];
         foreach ($cdrs as $key => $cdr) {

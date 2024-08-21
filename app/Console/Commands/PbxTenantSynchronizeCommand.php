@@ -50,14 +50,14 @@ class PbxTenantSynchronizeCommand extends Command
         Log::debug('total jobs: '.count($jobs));
 
         try {
-            $batch = Bus::batch($jobs)->then(function (Batch $batch) {
+            Bus::batch($jobs)->then(function () {
                 Cache::put('tenant_synchronize', [], 3600);
             })->catch(function (Batch $batch, Throwable $e) {
                 \Log::error('Error with batch: '.$e->getMessage());
             })->finally(function (Batch $batch) {})
                 ->name('Tenant-Recalculate')
                 ->dispatch();
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             \Log::error('Error with batch Global: '.$th->getMessage());
         }
 

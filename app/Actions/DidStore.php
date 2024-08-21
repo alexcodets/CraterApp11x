@@ -12,7 +12,7 @@ class DidStore
     public function handle(DidStoreData $data): array
     {
         try {
-            \Log::debug($data->dataToApi());
+            \Log::debug('data: ', $data->dataToApi());
             $api = new PbxWareApi($data->pbxServer);
             $response = $api->didStore($data->tenant->tenantid, $data->dataToApi());
 
