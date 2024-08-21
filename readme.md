@@ -63,7 +63,9 @@ npm run dev</code></pre>
 </ol>
 
 ## Testing
-### WIP.
+
+- Crear una copia de env.example y renombrarlo `env.testing`
+- Dentro del nuevo archivo `.env.testing` cambiar el valor de `DB_DATABASE` por `testing` quedando `DB_DATABASE=testing`
 
 <h2>Notas Adicionales</h2>
 <p>- Asegúrate de tener todas las extensiones PHP necesarias instaladas.</p>
