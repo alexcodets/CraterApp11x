@@ -10,7 +10,7 @@
 <p>Asegúrate de cumplir con los siguientes requisitos antes de comenzar:</p>
 
 <p>
-  <img src="https://img.shields.io/badge/PHP-8.1%2B-blue?logo=php&logoColor=white" class="icon" alt="PHP Logo"> <strong>PHP 8.1 o superior</strong>
+  <img src="https://img.shields.io/badge/PHP-8.2%2B-blue?logo=php&logoColor=white" class="icon" alt="PHP Logo"> <strong>PHP 8.2 o superior</strong>
 </p>
 <p>
   <img src="https://img.shields.io/badge/Composer-2.0%2B-blue?logo=composer&logoColor=white" class="icon" alt="Composer Logo"> <strong>Composer</strong>
