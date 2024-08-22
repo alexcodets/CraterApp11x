@@ -27,7 +27,7 @@ services:
             - mysql
     mysql:
         #container_name: '${SAIL_DB_NAME}'
-        image: 'mysql/mysql-server:5.7'
+        image: 'mysql/mysql-server:8.0'
         ports:
             - '${DB_FORWARD_PORT:-3306}:3306'
         environment:
