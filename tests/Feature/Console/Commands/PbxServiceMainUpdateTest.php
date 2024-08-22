@@ -1,6 +1,6 @@
 <?php
 
-namespace Console\Commands;
+namespace Tests\Feature\Console\Commands;
 
 use Crater\Mail\ServiceMainUpdateMail;
 use Crater\Models\Company;
@@ -26,7 +26,7 @@ class PbxServiceMainUpdateTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function seeding()
+    public function seeding(): void
     {
 
         $didArray = [
