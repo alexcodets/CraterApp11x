@@ -6,7 +6,7 @@ namespace Crater\Http\Controllers\V1\Settings;
 use Auth;
 use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\PbxPackagesRequest;
-use Crater\Models\AditionalCharges;
+use Crater\Models\AdditionalCharges;
 // models
 use Crater\Models\CompanySetting;
 // models
@@ -101,7 +101,7 @@ class PbxPackagesController extends Controller
         foreach ($resPbxPackages as $package) {
             //    //Log::debug($package);
             if ($package->template_did_id) {
-                $aditional_charges = AditionalCharges::where('aditional_charges.profile_did_id', '=', $package->template_did_id)->get();
+                $aditional_charges = AdditionalCharges::where('aditional_charges.profile_did_id', '=', $package->template_did_id)->get();
                 $package->profile_did_aditional_charges = $aditional_charges;
 
                 ///// cambios
@@ -133,7 +133,7 @@ class PbxPackagesController extends Controller
             }
 
             if ($package->template_extension_id) {
-                $aditional_charges = AditionalCharges::where('aditional_charges.profile_extension_id', '=', $package->template_extension_id)->get();
+                $aditional_charges = AdditionalCharges::where('aditional_charges.profile_extension_id', '=', $package->template_extension_id)->get();
                 $package->profile_extensions_aditional_charges = $aditional_charges;
             }
 
@@ -217,7 +217,7 @@ class PbxPackagesController extends Controller
         foreach ($resPbxPackages as $package) {
             //Log::debug($package);
             if ($package->template_did_id) {
-                $aditional_charges = AditionalCharges::where('aditional_charges.profile_did_id', '=', $package->template_did_id)->get();
+                $aditional_charges = AdditionalCharges::where('aditional_charges.profile_did_id', '=', $package->template_did_id)->get();
                 $package->profile_did_aditional_charges = $aditional_charges;
                 ///// cambios
                 $profile = ProfileDID::find($package->template_did_id);
@@ -239,7 +239,7 @@ class PbxPackagesController extends Controller
                 }
             }
             if ($package->template_extension_id) {
-                $aditional_charges = AditionalCharges::where('aditional_charges.profile_extension_id', '=', $package->template_extension_id)->get();
+                $aditional_charges = AdditionalCharges::where('aditional_charges.profile_extension_id', '=', $package->template_extension_id)->get();
                 $package->profile_extensions_aditional_charges = $aditional_charges;
             }
             //Log::debug($package);

@@ -20,12 +20,12 @@ class ProfileExtensions extends Model
     // para el softDelete
     public function aditionalCharges(): HasMany
     {
-        return $this->hasMany(AditionalCharges::class, 'profile_extension_id', 'id');
+        return $this->hasMany(AdditionalCharges::class, 'profile_extension_id', 'id');
     }
 
     public function aditionalChargesA(): HasMany
     {
-        return $this->hasMany(AditionalCharges::class, 'profile_extension_id', 'id')->where("status", "=", 1);
+        return $this->hasMany(AdditionalCharges::class, 'profile_extension_id', 'id')->where("status", "=", 1);
     }
 
     // Filtro para buscador en la vista principal

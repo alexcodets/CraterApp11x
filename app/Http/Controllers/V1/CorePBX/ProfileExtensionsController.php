@@ -6,7 +6,7 @@ use Auth;
 use Carbon\Carbon;
 use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\ProfileExtensionsRequest;
-use Crater\Models\AditionalCharges;
+use Crater\Models\AdditionalCharges;
 
 // models
 use Crater\Models\CompanySetting;
@@ -26,7 +26,7 @@ class ProfileExtensionsController extends Controller
         $res = [];
 
         if (! empty($charge['amount'])) {
-            $newCharge = new AditionalCharges();
+            $newCharge = new AdditionalCharges();
             $newCharge->company_id = $company_id;
             $newCharge->creator_id = $user_id;
             $newCharge->profile_extension_id = $profile_ext_id;
@@ -260,7 +260,7 @@ class ProfileExtensionsController extends Controller
         $profileExt = ProfileExtensions::find($id);
         $profileExt->update($data);
         // eliminar cargo adicional
-        AditionalCharges::where('profile_extension_id', $id)->delete();
+        AdditionalCharges::where('profile_extension_id', $id)->delete();
         // recorrer nuevos cargos adicionales
         foreach ($data['aditional_charges'] as $charge) {
             // aditional charges

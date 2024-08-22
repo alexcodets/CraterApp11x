@@ -798,7 +798,7 @@ class Invoice extends Model implements HasMedia
 
                 foreach ($request->pbx_packages['profile_extensions']['aditional_charges_a'] as $tax) {
                     //   \Log::debug($tax);
-                    $Aditional = AditionalCharges::find($tax['id']);
+                    $Aditional = AdditionalCharges::find($tax['id']);
                     $Aditional->amount = $tax['amount'];
                     $Aditional->update();
                 }
@@ -808,7 +808,7 @@ class Invoice extends Model implements HasMedia
             if ($request->pbx_packages['profile_did']['aditional_charges_a'] != null) {
                 foreach ($request->pbx_packages['profile_did']['aditional_charges_a'] as $tax) {
                     //  \Log::debug($tax);
-                    $Aditional = AditionalCharges::find($tax['id']);
+                    $Aditional = AdditionalCharges::find($tax['id']);
                     $Aditional->amount = $tax['amount'];
                     $Aditional->update();
                 }
