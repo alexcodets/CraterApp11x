@@ -95,7 +95,7 @@ class LogsDev extends Model
      *
      * @return Crater\Models\Log
      */
-    public static function finishLog(LogsDev $log = null, $response = [], int $time = 0, $type = 'D', $message = false)
+    public static function finishLog(LogsDev $log = null, $response = [], $time = 0, $type = 'D', $message = false)
     {
 
         if (! self::isEnable()) {
