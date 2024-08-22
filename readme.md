@@ -49,6 +49,9 @@ yarn install --legacy-peer-deps</code></pre>
   <li><strong>Siembra la base de datos con datos de demo</strong>
     <pre><code>php artisan db:seed --class=DemoSeeder</code></pre>
   </li>
+  <li><strong>Instalar dependencias de npm</strong>
+    <pre><code>npm install --legacy-peer-deps</code></pre>
+  </li>
   <li><strong>Inicia el entorno de desarrollo</strong>
     <pre><code>yarn dev
 # o
