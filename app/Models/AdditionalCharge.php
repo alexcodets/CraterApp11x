@@ -24,12 +24,12 @@ class AdditionalCharge extends Model
         'pbx_service_id'
     ];
 
-    public static function createAdditionalCharge($additionalCharges, $quantity, $pbxServiceId)
+    public static function createAdditionalCharge($additionalCharges, $quantity, $pbxServiceId): void
     {
         foreach($additionalCharges as $item) {
             if($item['status'] == 1) {
 
-                additionalCharge::create([
+                self::create([
                     'company_id' => $item['company_id'],
                     'creator_id' => $item['creator_id'],
                     'profile_extension_id' => $item['profile_extension_id'],
