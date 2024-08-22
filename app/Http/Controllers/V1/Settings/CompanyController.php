@@ -311,10 +311,6 @@ class CompanyController extends Controller
         ]);
     }
 
-    /**
-     * Retrive the Admin account.
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function getCompanyLogo(Request $request)
     {
         try {
@@ -337,22 +333,28 @@ class CompanyController extends Controller
                 $user->company['primary_color'] = $primary_color['primary_color'];
             }
 
-            $user->company['success'] = true;
+            $company = $user->company;
+
+            if (is_null($company)) {
+                return [];
+            }
+
+            $company->success = true;
 
             // verify if the exists image, added new object for validate in the front
             $mediaImage = $user->company->media->where('collection_name', 'wallpaperLogin')->first();
             Log::debug('media image', [$mediaImage]);
             if ($mediaImage != null) {
                 if (Storage::disk('public')->exists($mediaImage->id.'/'.$mediaImage->file_name)) {
-                    $user->company->wallpaper_login_exists = true;
+                    $company->wallpaper_login_exists = true;
                 } else {
-                    $user->company->wallpaper_login_exists = false;
+                    $company->wallpaper_login_exists = false;
                 }
             } else {
-                $user->company->wallpaper_login_exists = false;
+                $company->wallpaper_login_exists = false;
             }
 
-            return $user->company;
+            return $company;
 
             //  Fin de registro de log, debe guardarse inmediatamente antes de un return,
             $res = ["success" => true, "response" => [
