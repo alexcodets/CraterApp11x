@@ -10,6 +10,7 @@ use Crater\Models\User;
 use Crater\Services\Bandwidth\BandwidthService;
 use Crater\Services\Bandwidth\DataTransferObjects\AccountDTO;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Broadcast;
@@ -42,6 +43,8 @@ class AppServiceProvider extends ServiceProvider
             return;
         }
 
+        Model::preventLazyLoading(!$this->app->isProduction());
+
         Paginator::useBootstrapThree();
         $this->loadJsonTranslationsFrom(resource_path('assets/js/plugins'));
         $value = Setting::all();
@@ -54,13 +57,15 @@ class AppServiceProvider extends ServiceProvider
 
         $user = User::first();
 
-        $user->load([
-            'company',
-        ]);
+        if ($user){
+            $user->load([
+                'company',
+            ]);
 
-        if ($user['company']) {
-            $data = $user['company']['favicon'];
-            View::share('img', $data);
+            if ($user['company']) {
+                $data = $user['company']['favicon'];
+                View::share('img', $data);
+            }
         }
 
         $this->bootAuth();
@@ -100,7 +105,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function bootBroadcast()
     {
-        Broadcast::routes(["middleware" => 'api.auth']);
+        Broadcast::routes(['middleware' => 'api.auth']);
     }
 
     public function bootRoute()
