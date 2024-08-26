@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/admin/dashboard';
+    public const string HOME = '/admin/dashboard';
 
     /**
      * Bootstrap any application services.
@@ -94,7 +94,7 @@ class AppServiceProvider extends ServiceProvider
 
     }
 
-    public function bootAuth()
+    public function bootAuth(): void
     {
         // Implicitly grant "admin" role all permissions
         // This works in the app by using gate-related functions like auth()->user->can() and @can()
@@ -103,17 +103,16 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    public function bootBroadcast()
+    public function bootBroadcast(): void
     {
         Broadcast::routes(['middleware' => 'api.auth']);
     }
 
-    public function bootRoute()
+    public function bootRoute(): void
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60);
         });
-
 
     }
 }
