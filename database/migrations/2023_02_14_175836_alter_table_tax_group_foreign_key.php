@@ -20,7 +20,6 @@ return new class () extends Migration {
                 $table->dropForeign(['taxes_id']);
                 $table->foreign('taxes_id')->references('id')->on('tax_types')->onDelete('cascade');
             }
-
         });
     }
 

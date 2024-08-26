@@ -28,7 +28,9 @@ return new class () extends Migration {
     public function down(): void
     {
         Schema::table('pbx_extensions', function (Blueprint $table) {
-            //
+            // Aquí puedes revertir los cambios si es necesario
+            $table->dropColumn('ext'); // Eliminar la columna 'ext'
+            // Puedes agregar aquí la lógica para revertir los otros cambios si es necesario
         });
     }
 };
