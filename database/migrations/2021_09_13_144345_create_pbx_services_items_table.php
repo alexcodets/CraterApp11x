@@ -8,27 +8,33 @@ return new class () extends Migration {
     /**
      * Run the migrations.
      *
-     * @return void­
+     * @return void
      */
-    public function up(): void­
+    public function up(): void
     {
         Schema::create('pbx_services_items', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('pbx_services_id')->unsigned();
-            //   $table->foreign('pbx_services_id')->references('id')->on('pbx_services');
+            // Cambiar a unsignedBigInteger si las IDs son de tipo bigint
+            $table->unsignedBigInteger('pbx_services_id');
+            // Descomentar si deseas agregar la clave foránea
+            // $table->foreign('pbx_services_id')->references('id')->on('pbx_services');
 
-            $table->integer('item_group_id')->unsigned();
-            //   $table->foreign('item_group_id')->references('id')->on('item_groups');
+            $table->unsignedBigInteger('item_group_id');
+            // Descomentar si deseas agregar la clave foránea
+            // $table->foreign('item_group_id')->references('id')->on('item_groups');
 
-            $table->integer('items_id')->unsigned();
-            //  $table->foreign('items_id')->references('id')->on('items');
+            $table->unsignedBigInteger('items_id');
+            // Descomentar si deseas agregar la clave foránea
+            // $table->foreign('items_id')->references('id')->on('items');
 
-            $table->integer('company_id')->unsigned()->nullable();
-            //   $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id')->nullable();
+            // Descomentar si deseas agregar la clave foránea
+            // $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
 
-            $table->unsignedInteger('creator_id')->unsigned()->nullable();
-            //$table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('creator_id')->nullable();
+            // Descomentar si deseas agregar la clave foránea
+            // $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('discount_type');
             $table->decimal('quantity', 15, 2);
@@ -39,7 +45,6 @@ return new class () extends Migration {
             $table->unsignedBigInteger('total');
             $table->enum('status', ['A', 'I'])->nullable();
             $table->string('description')->nullable();
-
 
             $table->timestamps();
             $table->softDeletes();
