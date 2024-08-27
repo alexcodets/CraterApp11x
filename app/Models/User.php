@@ -129,7 +129,7 @@ class User extends Authenticatable implements HasMedia
      * Find the user instance for the given username.
      *
      * @param string $username
-     * @return \Crater\User
+     * @return self
      */
     public function findForPassport($username)
     {
@@ -172,6 +172,8 @@ class User extends Authenticatable implements HasMedia
         $dateFormat = Cache::remember("carbon_date_format_{$this->company_id}", 60 * 5, function () {
             return CompanySetting::getSetting('carbon_date_format', $this->company_id);
         });
+
+        $dateFormat ??= 'Y-m-d H:i:s';
 
         return Carbon::parse($this->created_at)->format($dateFormat);
     }

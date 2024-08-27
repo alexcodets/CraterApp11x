@@ -1,6 +1,7 @@
 <?php
 
-class paypal_pro
+namespace Crater\Authorize\Controllers;
+class PaypalPro
 {
     public $API_USERNAME;
 

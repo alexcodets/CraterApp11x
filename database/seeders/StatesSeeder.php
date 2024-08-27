@@ -4923,12 +4923,17 @@ class StatesSeeder extends Seeder
             return;
         }*/
 
-        $id = 0;
+//        $id = 0;
+//
+//        foreach ($states as $state) {
+//            $id++;
+//            $state['id'] = $id;
+//            DB::table('states')->insert($state);
+//        }
 
-        foreach ($states as $state) {
-            $id++;
-            $state['id'] = $id;
-            DB::table('states')->insert($state);
+        foreach (array_chunk($states, 250) as $values) {
+            //$state->insert($values);
+            State::insert($values);
         }
 
     }

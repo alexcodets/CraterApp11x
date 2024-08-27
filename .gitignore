@@ -23,8 +23,7 @@ _ide_helper_models.php
 docker-compose-dev.yml
 tareas.md
 /tools
-docker-composee.yml
-docker-compose.yml
+docker-compose.old.yml
 docker-compose-reny.yml
 dock
 .DS_Store

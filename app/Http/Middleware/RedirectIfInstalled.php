@@ -4,23 +4,15 @@ namespace Crater\Http\Middleware;
 
 use Closure;
 use Crater\Models\Setting;
+use Illuminate\Http\Request;
+use Storage;
 
 class RedirectIfInstalled
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-
-        if (\Storage::disk('local')->has('database_created')) {
-            if (Setting::getSetting('profile_complete') === 'COMPLETED') {
-                return redirect('login');
-            }
+        if (Storage::disk('local')->exists('database_created') && Setting::getSetting('profile_complete') === 'COMPLETED') {
+            return redirect('login');
         }
 
         return $next($request);

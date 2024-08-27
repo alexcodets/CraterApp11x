@@ -4,9 +4,9 @@ namespace Crater\DataObject;
 
 class CsvTaxLineData
 {
-    public const LINE = 0;
-    public const DISCOUNT = 2;
-    public const TAX = 1;
+    public const int LINE = 0;
+    public const int DISCOUNT = 2;
+    public const int TAX = 1;
 
     public string $invoiceNumber;
 

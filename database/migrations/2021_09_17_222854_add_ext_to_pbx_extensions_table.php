@@ -14,11 +14,9 @@ return new class () extends Migration {
     {
         Schema::table('pbx_extensions', function (Blueprint $table) {
             $table->unsignedInteger('ext')->nullable()->after('ext_name');
-            // Cambiar la referencia a tenant_details
-            // Si no existe tenant_details, simplemente elimínala de aquí
-            $table->unsignedInteger('pbx_tenant_id')->nullable()->change();
-            $table->unsignedInteger('company_id')->nullable()->change();
-            $table->unsignedInteger('creator_id')->nullable()->change();
+            $table->unsignedInteger('pbx_tenant_id')->nullable()->after('tenant_details')->change();
+            $table->unsignedInteger('company_id')->nullable()->after('pbx_tenant_id')->change();
+            $table->unsignedInteger('creator_id')->nullable()->after('company_id')->change();
         });
     }
 

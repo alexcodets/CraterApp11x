@@ -4,7 +4,7 @@ namespace Crater\DataObject;
 
 class CdrDO
 {
-    public function getCdr(array $array)
+    public function getCdr(array $array): array
     {
         if (count($array) == 8) {
             return $this->billedMode($array);

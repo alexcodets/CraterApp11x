@@ -47,12 +47,12 @@ class ProfileDID extends Model
 
     public function aditionalCharges(): HasMany
     {
-        return $this->hasMany(AditionalCharges::class, 'profile_did_id', 'id');
+        return $this->hasMany(AdditionalCharges::class, 'profile_did_id', 'id');
     }
 
     public function aditionalChargesA(): HasMany
     {
-        return $this->hasMany(AditionalCharges::class, 'profile_did_id', 'id')->where("status", "=", 1);
+        return $this->hasMany(AdditionalCharges::class, 'profile_did_id', 'id')->where("status", "=", 1);
     }
 
     public function itemGroups(): BelongsToMany

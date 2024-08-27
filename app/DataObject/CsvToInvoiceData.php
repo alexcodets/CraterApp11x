@@ -6,9 +6,9 @@ use Crater\Helpers\General;
 
 class CsvToInvoiceData
 {
-    public const STATUSES = ['DRAFT', 'DUE', 'SENT', 'VIEWED', 'OVERDUE', 'COMPLETED', 'SAVE_DRAFT',];
-    public const PAID_STATUSES = ['PAID', 'PARTIALLY_PAID', 'UNPAID'];
-    public const INVOICE_NUMBER_REGEX = '/^[a-zA-Z]{1,9}-\d{5}$/ms';
+    public const array STATUSES = ['DRAFT', 'DUE', 'SENT', 'VIEWED', 'OVERDUE', 'COMPLETED', 'SAVE_DRAFT'];
+    public const array PAID_STATUSES = ['PAID', 'PARTIALLY_PAID', 'UNPAID'];
+    public const string INVOICE_NUMBER_REGEX = '/^[a-zA-Z]{1,9}-\d{5}$/ms';
 
     public string $invoiceNumber;
 
@@ -52,7 +52,7 @@ class CsvToInvoiceData
     public static function validateArray(array $line, string $dateFormat, ?array $errors = []): array
     {
 
-        if (preg_match(self::INVOICE_NUMBER_REGEX, $line[0], $matches, PREG_OFFSET_CAPTURE, 0) == 0) {
+        if (preg_match(self::INVOICE_NUMBER_REGEX, $line[0], $matches, PREG_OFFSET_CAPTURE) == 0) {
             $errors['invoice']['invalid'][] = $line[0];
         }
 

@@ -39,6 +39,13 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
         ],
+
+        'deprecation' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/warnings.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
     ],
 
 ];

@@ -45,7 +45,7 @@ class CompanySetting extends Model
         }
     }
 
-    public static function getSettings($settings, $company_id)
+    public static function getSettings($settings, $company_id): array
     {
         $settings = static::whereIn('option', $settings)->whereCompany($company_id)->get();
         $companySettings = [];
@@ -59,12 +59,6 @@ class CompanySetting extends Model
 
     public static function getSetting($key, $company_id)
     {
-        $setting = static::whereOption($key)->whereCompany($company_id)->first();
-
-        if ($setting) {
-            return $setting->value;
-        } else {
-            return null;
-        }
+        return static::whereOption($key)->whereCompany($company_id)->first()?->value;
     }
 }
